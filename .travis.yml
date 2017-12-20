@@ -10,5 +10,5 @@ script:
   - wget http://devtools.qiniu.com/2.1.6/qshell-linux-x64
   - chmod +x qshell-linux-x64
   - ./qshell-linux-x64 account $ak $sk
-  - ./qshell-linux-x64 rput abcd2 cas.gz ./rocksdb.gz true application/x-gzip http://upload-na0.qiniu.com 1
-  - ./qshell-linux-x64 rput abcd cas.gz ./rocksdb.gz true application/x-gzip http://upload.qiniu.com 1
+  - ./qshell-linux-x64 rput abcd2 rocksdb.gz ./rocksdb.gz true application/x-gzip http://upload-na0.qiniu.com 1
+  - ./qshell-linux-x64 rput abcd rocksdb.gz ./rocksdb.gz true application/x-gzip http://upload.qiniu.com 1
