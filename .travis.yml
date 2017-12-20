@@ -1,0 +1,21 @@
+language: rust
+before_install:
+  - git clone https://github.com/spacejam/rust-rocksdb
+script:
+  - cd rust-rocksdb
+  - git submodule update --init --recursive
+  - cargo build
+  - cd ..
+  - tar czf rocksdb.gz ./rust-rocksdb
+  - wget http://devtools.qiniu.com/2.1.6/qshell-linux-x64
+  - chmod +x qshell-linux-x64
+  - ./qshell-linux-x64 account $ak $sk
+  - ./qshell-linux-x64 rput abcd2 cas.gz ./rocksdb.gz true application/x-gzip http://upload-na0.qiniu.com 1
+  - ./qshell-linux-x64 rput abcd cas.gz ./rocksdb.gz true application/x-gzip http://upload.qiniu.com 1
+deploy:
+  provider: releases
+  api_key: $CI_USER_TOKEN
+  file: cas.gz
+  skip_cleanup: true
+  on:
+tags: true
